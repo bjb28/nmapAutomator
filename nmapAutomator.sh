@@ -258,7 +258,7 @@ progressBar() {
 # $1 is nmap command to be run, $2 is progress bar $refreshRate
 nmapProgressBar() {
         refreshRate="${2:-1}"
-        outputFile="$(echo $1 | sed -e 's/.*-oN \(.*\).nmap.*/\1/').nmap"
+        outputFile="$(echo $1 | awk '{for(i=1;i<=NF;i++)if($i=="-oA")print $(i+1)}').nmap"
         tmpOutputFile="${outputFile}.tmp"
 
         # Run the nmap command
